@@ -19,3 +19,11 @@ Route::get('/', function () {
 })->name('welcome');
 
 Route::resource('/book', BookController::class);
+
+Route::post('/submit', function (Illuminate\Http\Request $request) {
+    $username = $request->input('username');
+    $nrp = $request->input('nrp');
+
+    // Lakukan sesuatu dengan data ini, misalnya menyimpannya ke database.
+    return "Username: $username, NRP: $nrp";
+})->name('submitForm');
