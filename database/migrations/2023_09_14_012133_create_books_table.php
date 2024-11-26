@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Membuat tabel books
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -26,6 +27,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        // Menghapus tabel books dan users
         Schema::dropIfExists('books');
     }
 };

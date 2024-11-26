@@ -21,9 +21,11 @@ Route::get('/', function () {
 Route::resource('/book', BookController::class);
 
 Route::post('/submit', function (Illuminate\Http\Request $request) {
-    $username = $request->input('username');
+    $username = $request->input('name');
     $nrp = $request->input('nrp');
 
     // Lakukan sesuatu dengan data ini, misalnya menyimpannya ke database.
-    return "Username: $username, NRP: $nrp";
+    return "Name: $name, NRP: $nrp";
 })->name('submitForm');
+
+
