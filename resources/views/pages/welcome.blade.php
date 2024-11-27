@@ -4,6 +4,24 @@
     <div class="container">
         <h1 class="title">Welcome to Library</h1>
 
+        <!-- Tampilkan pesan sukses -->
+        @if (session('success'))
+            <div class="message" style="color: green; background: #e6ffe6; padding: 10px; border: 1px solid green; border-radius: 5px;">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <!-- Tampilkan pesan error -->
+        @if ($errors->any())
+            <div class="message" style="color: red; background: #ffe6e6; padding: 10px; border: 1px solid red; border-radius: 5px;">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <!-- Form untuk input name dan NRP -->
         <form id="dataForm" class="form-container">
             @csrf
@@ -24,7 +42,7 @@
         <div id="message" class="message"></div>
     </div>
 
-    <script>
+    {{-- <script>
         $(document).ready(function () {
             $('#dataForm').on('submit', function (e) {
                 e.preventDefault(); // Mencegah reload halaman
@@ -109,7 +127,7 @@
                 });
             });
         });
-    </script>
+    </script> --}}
 
 
 

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\FormController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,5 +28,9 @@ Route::post('/submit', function (Illuminate\Http\Request $request) {
     // Lakukan sesuatu dengan data ini, misalnya menyimpannya ke database.
     return "Name: $name, NRP: $nrp";
 })->name('submitForm');
+
+Route::get('/form/create', [FormController::class, 'create'])->name('form.create');
+Route::post('/form/store', [FormController::class, 'store'])->name('form.store');
+
 
 
