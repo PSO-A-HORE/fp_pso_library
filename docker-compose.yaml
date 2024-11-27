@@ -5,7 +5,7 @@ services:
     image: laravel
     container_name: laravel-app
     restart: unless-stopped
-    volumes:
+    volumes: 
     - .:/var/www/html
     - ./docker/apache/laravel.conf:/etc/apache2/sites-available/000-default.conf
     networks:

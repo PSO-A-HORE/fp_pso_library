@@ -1,4 +1,4 @@
-# Use the official PHP image as base
+# Use the official PHP image as base edited by vaskya
 FROM php:8.2-apache
 
 # Set working directory
@@ -22,7 +22,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Copy the existing application directory contents
 COPY . /var/www/html
 
-# Enable Apache mod_rewrite
+# Enable Apache mod_rewrite 
 RUN a2enmod rewrite
 
 # Install application dependencies
