@@ -22,6 +22,11 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Copy the existing application directory contents
 COPY . /var/www/html
 
+RUN rm -rf /etc/apache2/sites-available/000-default.conf
+
+#Copy apache2 config
+COPY docker/apache/laravel.conf /etc/apache2/sites-available/000-default.conf
+
 # Enable Apache mod_rewrite 
 RUN a2enmod rewrite
 
