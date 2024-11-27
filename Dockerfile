@@ -34,5 +34,5 @@ COPY . /var/www/html
 # Change ownership of application directory
 RUN chown -R www-data:www-data /var/www/html
 
-# Expose port 9000 and start php-fpm server
+# Expose port 80
 EXPOSE 80
