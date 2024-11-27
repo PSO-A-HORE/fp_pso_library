@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  app:
+    image: laravel
+    container_name: laravel-app
+    restart: unless-stopped
+    volumes:
+    - .:/var/www/html
+    - ./docker/apache/laravel.conf:/etc/apache2/sites-available/000-default.conf
+    networks:
+      - laravel
+    ports:
+      - "8080:80"
+
+  # db:
+  #   image: mysql:5.7
+  #   container_name: laravel-db
+  #   restart: unless-stopped
+  #   environment:
+  #     MYSQL_DATABASE: laravel
+  #     MYSQL_ROOT_PASSWORD: root
+  #   volumes:
+  #     - mysql-data:/var/lib/mysql
+  #   networks:
+  #     - laravel
+  #   ports:
+  #     - "3306:3306"
+
+networks:
+  laravel:
+    driver: bridge
+
+volumes:
+  mysql-data:
