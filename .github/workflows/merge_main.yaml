@@ -18,6 +18,13 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+      
+      - name: Set outputs
+        id: vars
+        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+      
+      - name: Check outputs
+        run: echo ${{ steps.vars.outputs.sha_short }}
 
       - name: Auth to GCP
         uses: 'google-github-actions/auth@v1'
@@ -29,13 +36,13 @@ jobs:
 
       - name: Build Docker image
         run: |
-          export IMAGE_NAME=${{ env.GAR_LOCATION }}/${{ env.PROJECT_ID}}/${{ env.REPOSITORY_NAME }}/library:$GITHUB_SHA
+          export IMAGE_NAME=${{ env.GAR_LOCATION }}/${{ env.PROJECT_ID}}/${{ env.REPOSITORY_NAME }}/library:${{ steps.vars.outputs.sha_short }}
           docker build -t $IMAGE_NAME .
           docker push $IMAGE_NAME
 
       - name: Deploy to Cloud Run
         run: |
-          export IMAGE_NAME=${{ env.GAR_LOCATION }}/${{ env.PROJECT_ID}}/${{ env.REPOSITORY_NAME }}/library:$GITHUB_SHA
+          export IMAGE_NAME=${{ env.GAR_LOCATION }}/${{ env.PROJECT_ID}}/${{ env.REPOSITORY_NAME }}/library:${{ steps.vars.outputs.sha_short }}
           gcloud run deploy $IMAGE_NAME \
             --image $IMAGE_NAME \
             --platform managed \
