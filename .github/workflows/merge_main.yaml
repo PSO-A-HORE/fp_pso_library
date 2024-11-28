@@ -5,9 +5,9 @@ on:
     branches:
       - main
 
-env: 
-    IMAGE_NAME: library
+env:
     REGION: asia-southeast-2
+    GAR_LOCATION: asia-southeast2-docker.pkg.dev/psoyey/library/library
 
 jobs:
   deploy:
@@ -23,19 +23,19 @@ jobs:
           credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
 
       - name: Configure Docker
-        run: gcloud auth configure-docker
+        run: gcloud auth configure-docker ${{ env.GAR_LOCATION }} --quiet 
 
       - name: Build Docker image
         run: |
-          export IMAGE_NAME=asia-southeast2-docker.pkg.dev/psoyey/library/library:$GITHUB_SHA
+          export IMAGE_NAME=${{ env.GAR_LOCATION }}:$GITHUB_SHA
           docker build -t $IMAGE_NAME .
           docker push $IMAGE_NAME
 
       - name: Deploy to Cloud Run
         run: |
-          export IMAGE_NAME=asia-southeast2-docker.pkg.dev/psoyey/library/library:$GITHUB_SHA
+          export IMAGE_NAME=${{ env.GAR_LOCATION }}:$GITHUB_SHA
           gcloud run deploy $IMAGE_NAME \
             --image $IMAGE_NAME \
             --platform managed \
-            --region $REGION \
+            --region ${{ env.REGION }} \
             --allow-unauthenticated
