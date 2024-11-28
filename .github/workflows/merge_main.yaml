@@ -5,7 +5,7 @@ on:
     branches:
       - main
 
-env: 
+env:
     IMAGE_NAME: library
     REGION: asia-southeast-2
 
