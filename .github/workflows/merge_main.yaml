@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-    REGION: asia-southeast-2
+    REGION: asia-southeast2
     GAR_LOCATION: asia-southeast2-docker.pkg.dev
     PROJECT_ID: psoyey
     REPOSITORY_NAME: library
