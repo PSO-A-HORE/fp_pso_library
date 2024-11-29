@@ -4,5 +4,9 @@
 
 Simple App CRUD with laravel 10. (CRUD Book / Library)
 
+Book Library adalah aplikasi sederhana yang dirancang untuk mengelola data perpustakaan. Aplikasi ini dibangun dengan fokus pada kesederhanaan dan menggunakan GitHub Actions sebagai CI/CD pipeline untuk otomatisasi deployment.
 
-HALOO GAIS
+Fitur
+- CRUD Manajemen Buku: Menambahkan, mengedit, dan menghapus data buku.
+- Memasukkan Nama & NRP
+
