@@ -29,12 +29,12 @@ jobs:
         run: gcloud auth configure-docker ${{ env.GAR_LOCATION }} --quiet
 
       - name: copy .env file
-        run: cat ${{ secrets.env.ENV_FILE_NIDA }} > .env
+        run: echo "${{ secrets.ENV_FILE_NIDA }}" > .env
 
       - name: show .env
         run: cat .env
 
-      •⁠  ⁠name: Build Docker image
+      - name: Build Docker image
         run: |
           export IMAGE_NAME=${{ env.GAR_LOCATION }}/${{ env.PROJECT_ID}}/${{ env.REPOSITORY_NAME }}/library:$GITHUB_SHA
           docker build -t $IMAGE_NAME .
@@ -49,7 +49,7 @@ jobs:
         with:
           credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
 
-      •⁠  ⁠name: Deploy to Cloud Run
+      - name: Deploy to Cloud Run
         run: |
             export IMAGE_NAME=${{ env.GAR_LOCATION }}/${{ env.PROJECT_ID}}/${{ env.REPOSITORY_NAME }}/library:$GITHUB_SHA
             gcloud run deploy ${{ env.REPOSITORY_NAME }}-nida \
