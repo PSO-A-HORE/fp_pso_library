@@ -7,8 +7,10 @@ on:
       - ci-*
 
 env:
-    REGION: asia-southeast-2
-    GAR_LOCATION: asia-southeast2-docker.pkg.dev/psoyey/library/library
+    REGION: asia-southeast2
+    GAR_LOCATION: asia-southeast2-docker.pkg.dev
+    PROJECT_ID: psoyey
+    REPOSITORY_NAME: library
 
 jobs:
   build:
@@ -48,9 +50,9 @@ jobs:
           
       - name: Deploy to Cloud Run
         run: |
-          export IMAGE_NAME=${{ env.GAR_LOCATION }}:$GITHUB_SHA
-          gcloud run deploy $library-indri \
-            --image $IMAGE_NAME \
-            --platform managed \
-            --region ${{ env.REGION }} \
-            --allow-unauthenticated
+            export IMAGE_NAME=${{ env.GAR_LOCATION }}/${{ env.PROJECT_ID}}/${{ env.REPOSITORY_NAME }}/library:$GITHUB_SHA
+            gcloud run deploy ${{ env.REPOSITORY_NAME }}-indri \
+              --image $IMAGE_NAME \
+              --platform managed \
+              --region ${{ env.REGION }} \
+              --allow-unauthenticated
