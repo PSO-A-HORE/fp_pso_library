@@ -4,15 +4,14 @@ on:
   push:
     branches:
       - main
+      - ci-*
 
 env:
-    REGION: asia-southeast2
-    GAR_LOCATION: asia-southeast2-docker.pkg.dev
-    PROJECT_ID: psoyey
-    REPOSITORY_NAME: library
+    REGION: asia-southeast-2
+    GAR_LOCATION: asia-southeast2-docker.pkg.dev/psoyey/library/library
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -25,18 +24,32 @@ jobs:
           credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
 
       - name: Configure Docker
-        run: gcloud auth configure-docker ${{ env.GAR_LOCATION }} --quiet 
+        run: gcloud auth configure-docker ${{ env.GAR_LOCATION }} --quiet
+      
+      - name: copy .env file
+        run: cat ${{ secrets.env.ENV_FILE_VASKYA }} > .env
+      
+      - name: show .env
+        run: cat .env
 
       - name: Build Docker image
         run: |
-          export IMAGE_NAME=${{ env.GAR_LOCATION }}/${{ env.PROJECT_ID}}/${{ env.REPOSITORY_NAME }}/library:$GITHUB_SHA
+          export IMAGE_NAME=${{ env.GAR_LOCATION }}:$GITHUB_SHA
           docker build -t $IMAGE_NAME .
           docker push $IMAGE_NAME
 
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auth to GCP
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+          
       - name: Deploy to Cloud Run
         run: |
-          export IMAGE_NAME=${{ env.GAR_LOCATION }}/${{ env.PROJECT_ID}}/${{ env.REPOSITORY_NAME }}/library:$GITHUB_SHA
-          gcloud run deploy ${{ env.REPOSITORY_NAME }} \
+          export IMAGE_NAME=${{ env.GAR_LOCATION }}:$GITHUB_SHA
+          gcloud run deploy $library-vaskya \
             --image $IMAGE_NAME \
             --platform managed \
             --region ${{ env.REGION }} \
