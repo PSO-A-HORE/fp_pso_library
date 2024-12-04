@@ -27,12 +27,12 @@ jobs:
 
       - name: Configure Docker
         run: gcloud auth configure-docker ${{ env.GAR_LOCATION }} --quiet
-      
+
       - name: copy .env file
-        run: cat ${{ secrets.env.ENV_FILE_INDRI }} > .env
+        run: echo "${{ secrets.ENV_FILE_INDRI }}" > .env
 
       - name: show .env
-        run: cat .env  
+        run: cat .env
 
       - name: Build Docker image
         run: |
@@ -48,7 +48,7 @@ jobs:
         uses: 'google-github-actions/auth@v1'
         with:
           credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
-          
+
       - name: Deploy to Cloud Run
         run: |
             export IMAGE_NAME=${{ env.GAR_LOCATION }}/${{ env.PROJECT_ID}}/${{ env.REPOSITORY_NAME }}/library:$GITHUB_SHA
