@@ -1,5 +1,5 @@
 resource "google_sql_database_instance" "db_instance" {
-  name             = "library-db-vaskya"
+  name             = "library-db"
   database_version = "MYSQL_5_7"
   region           = var.region
 
@@ -9,7 +9,7 @@ resource "google_sql_database_instance" "db_instance" {
       authorized_networks {
         name  = "all"
         value = "0.0.0.0/0"
-      }
+        }
     }
   }
 
