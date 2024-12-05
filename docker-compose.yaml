@@ -9,10 +9,18 @@ services:
     volumes: 
     - .:/var/www/html
     - ./docker/apache/laravel.conf:/etc/apache2/sites-available/000-default.conf
+    - ./docker/php/php.ini:/usr/local/etc/php/php.ini
     networks:
       - laravel
     ports:
       - "8080:80"
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+        reservations:
+          cpus: '1'
+          memory: 512M
 
   # db:
   #   image: mysql:5.7
