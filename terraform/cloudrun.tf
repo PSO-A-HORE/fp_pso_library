@@ -11,8 +11,15 @@ resource "google_cloud_run_service" "service" {
         }
       }
     }
+    metadata {
+        annotations = {
+          "run.googleapis.com/cloudsql-instances" = google_sql_database_instance.db_instance.connection_name
+          "run.googleapis.com/client-name"        = "library_db"
+        }
+     }
   }
-
+  autogenerate_revision_name = true
+  
   traffic {
     percent         = 100
     latest_revision = true
