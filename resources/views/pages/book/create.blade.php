@@ -3,7 +3,7 @@
 @section('body')
     <h1 class="mb-0">Add Book</h1>
     <hr>
-    <form action="{{ route('book.store') }}" method="post">
+    <form action="{{ app()->environment('production') ? secure_url(route('book.store')) : route('book.store') }}" method="POST">
         @csrf
         <div class="row mb-3">
             <div class="col">
