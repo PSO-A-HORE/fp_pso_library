@@ -16,17 +16,17 @@ class FormController extends Controller
     {
         // Validasi input
         $request->validate([
-            'name' => 'required|string|max:255', // Sesuaikan key dengan input di form
-            'nrp' => 'required|string|size:10|unique:form,nrp', // Validasi NRP harus unik
+            'nama' => 'required|string|max:255', // Sesuaikan key dengan input di form
+            'nrp' => 'required|string|size:10', // Validasi NRP harus unik
         ]);
 
         // Simpan data ke database
         Form::create([
-            'nama' => $request->name, // Mapping input name ke field database
+            'nama' => $request->nama, // Mapping input nama ke field database
             'nrp' => $request->nrp,  // Mapping input nrp ke field database
         ]);
 
         // Redirect dengan pesan sukses
-        return redirect()->route('form.create')->with('success', 'Data berhasil disimpan!');
+        return redirect()->route('book.index')->with('success', 'Data berhasil disimpan!');
     }
 }
