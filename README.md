@@ -1,12 +1,19 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-## Book Library: How To Use This App
+# Book Library: How To Use This App
 
 Simple App CRUD with laravel 10. (CRUD Book / Library)
 
 Book Library adalah aplikasi sederhana yang dirancang untuk mengelola data perpustakaan. Aplikasi ini dibangun dengan fokus pada kesederhanaan dan menggunakan GitHub Actions sebagai CI/CD pipeline untuk otomatisasi deployment.
 
-# Fitur
+## Requirments
+- php 8.0
+- Docker
+- MySQL 5.7
+- Terraform
+- Google Cloud Platform
+
+## Fitur
 CRUD Library Book:
  - Tambah buku baru.
  - Lihat daftar buku yang tersedia.
@@ -15,7 +22,7 @@ CRUD Library Book:
 Manajemen Data Anggota:
  - Memasukkan nama dan NRP anggota perpustakaan.
 
-# Cara Menggunakan (Dari Sudut Pandang Pengguna)
+## Cara Menggunakan (Dari Sudut Pandang Pengguna)
 Mengakses Aplikasi:
  - Buka aplikasi melalui URL https://library-22416837039.asia-southeast2.run.app/.
 
@@ -27,7 +34,7 @@ Manajemen Buku:
 Manajemen Anggota:
 - Isi formulir data anggota perpustakaan seperti nama dan NRP saat pendaftaran.
 
-# Cara Menggunakan (Dari Sudut Pandang Developer)
+## Cara Menggunakan (Dari Sudut Pandang Developer)
 
 Menjalankan aplikasi secara lokal
 1. Clone Repository
@@ -47,6 +54,12 @@ akses aplikasi di http://localhost:8080.
 
 3. Konfigurasi .env
 - Sesuaikan variabel di file .env sesuai kebutuhan, seperti pengaturan database.
+
+# Deployment manual dengan Terraform
+1. Masuk ke directory terraform 
+2. Menjalankan command `terraform init`
+3. Menjalankan command `terraform plan`
+4. Menjalankan command `terraform apply`
 
 # Deployment dengan CI/CD (GitHub Actions)
 Langkah Konfigurasi:
