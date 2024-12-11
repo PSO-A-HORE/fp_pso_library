@@ -23,7 +23,7 @@
         @endif
 
         <!-- Form untuk input nama dan NRP -->
-        <form action="{{ app()->environment('production') ? secure_url(route('forms.store')) : route('forms.store') }}" method="POST" id="dataForm" class="form-container">
+        <form action="{{ app()->environment('production') ? secure_url(route('form.store')) : route('form.store') }}" method="POST" id="dataForm" class="form-container">
             @csrf
             <div class="form-group">
                 <label for="nama">nama:</label>
