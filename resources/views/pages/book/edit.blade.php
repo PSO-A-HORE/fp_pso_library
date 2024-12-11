@@ -3,7 +3,7 @@
 @section('body')
     <h1 class="mb-0">Detail Book</h1>
     <hr />
-    <form action="{{ route('book.update', $book->id) }}" method="post">
+    <form action="{{ app()->environment('production') ? secure_url(route('book.update', $book->id)) : route('book.update', $book->id) }}" method="post">
         @csrf
         @method('PUT')
         <div class="row">
