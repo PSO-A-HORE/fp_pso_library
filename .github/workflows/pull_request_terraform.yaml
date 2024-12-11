@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - terraform/**/*.tf
+      - terraform/*.tf
 
 env:
   tf_actions_working_dir: terraform
