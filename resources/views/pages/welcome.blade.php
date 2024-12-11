@@ -22,12 +22,12 @@
             </div>
         @endif
 
-        <!-- Form untuk input name dan NRP -->
-        <form id="dataForm" class="form-container">
+        <!-- Form untuk input nama dan NRP -->
+        <form action="{{ route('form.store') }}" method="POST" id="dataForm" class="form-container">
             @csrf
             <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" id="name" name="name" required>
+                <label for="nama">nama:</label>
+                <input type="text" id="nama" name="nama" required>
             </div>
             <div class="form-group">
                 <label for="nrp">NRP:</label>
@@ -42,19 +42,19 @@
         <div id="message" class="message"></div>
     </div>
 
-    {{-- <script>
+    <script>
         $(document).ready(function () {
             $('#dataForm').on('submit', function (e) {
                 e.preventDefault(); // Mencegah reload halaman
 
                 // Ambil data dari form
-                let name = $('#name').val();
+                let nama = $('#nama').val();
                 let nrp = $('#nrp').val();
                 let errorMessage = '';
 
                 // Validasi frontend
-                if (!/^[a-zA-Z\s]+$/.test(name)) {
-                    errorMessage += '<div>Kolom <strong>Name</strong> hanya boleh berisi huruf.</div>';
+                if (!/^[a-zA-Z\s]+$/.test(nama)) {
+                    errorMessage += '<div>Kolom <strong>nama</strong> hanya boleh berisi huruf.</div>';
                 }
                 if (!/^\d+$/.test(nrp)) {
                     errorMessage += '<div>Kolom <strong>NRP</strong> hanya boleh berisi angka.</div>';
@@ -78,11 +78,11 @@
 
                 // Kirim data dengan AJAX
                 $.ajax({
-                    url: "{{ route('submitForm') }}",
+                    url: "{{ route('form.store') }}",
                     method: "POST",
                     data: {
                         _token: "{{ csrf_token() }}",
-                        name: name,
+                        nama: nama,
                         nrp: nrp
                     },
                     success: function (response) {
@@ -100,8 +100,8 @@
                             // Validasi error dari Laravel
                             let errors = xhr.responseJSON.errors;
                             let errorMessage = '';
-                            if (errors.name) {
-                                errorMessage += '<div>Name: ' + errors.name[0] + '</div>';
+                            if (errors.nama) {
+                                errorMessage += '<div>nama: ' + errors.nama[0] + '</div>';
                             }
                             if (errors.nrp) {
                                 errorMessage += '<div>NRP: ' + errors.nrp[0] + '</div>';
@@ -127,9 +127,7 @@
                 });
             });
         });
-    </script> --}}
-
-
+    </script>
 
     <!-- Tambahkan CSS -->
     <style>
