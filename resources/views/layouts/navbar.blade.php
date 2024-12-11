@@ -8,9 +8,6 @@
           <li class="nav-item">
             <a class="nav-link" href="{{ route('welcome') }}">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('book.index') }}">Book</a>
-          </li>
         </ul>
       </div>
     </div>
