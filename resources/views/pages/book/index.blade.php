@@ -38,12 +38,6 @@
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Delete</button>
                             </form>
-                                    @csrf
-                                    @method('DELETE')
-                                    <button class="btn btn-danger m-0">
-                                        Delete
-                                    </button>
-                                </form>
                             </div>
                         </td>
                     </tr>
