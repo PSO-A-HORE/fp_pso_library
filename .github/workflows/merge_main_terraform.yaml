@@ -1,4 +1,4 @@
-name: Build and Deploy to Cloud Run
+name: Deploy resources with terraform
 
 on:
   push:
@@ -29,26 +29,26 @@ jobs:
       - name: Configure Docker
         run: gcloud auth configure-docker ${{ env.GAR_LOCATION }} --quiet
 
-      - name: Set up Terraform 
-        uses: hashicorp/setup-terraform@v3 
-      
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+
       - name: Terraform fmt
         id: fmt
         run: terraform fmt -check
         continue-on-error: true
-        
+
       - name: Terraform Init
         id: init
         run: terraform init
-        
+
       - name: Terraform Validate
         id: validate
         run: terraform validate -no-color
-        
+
       - name: Terraform Plan
         id: plan
         run: terraform plan -no-color
         continue-on-error: true
-  
+
       - name: Terraform Apply
         run: terraform apply -auto-approve
