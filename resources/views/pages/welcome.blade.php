@@ -2,7 +2,7 @@
 
 @section('body')
     <div class="container">
-        <h1 class="title">Welcome to Library</h1>
+        <h1 class="title">Selamat Datang</h1>
 
         <!-- Tampilkan pesan sukses -->
         @if (session('success'))
